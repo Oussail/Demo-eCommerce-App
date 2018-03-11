@@ -34,3 +34,18 @@ class ContactForm(forms.Form):
 				"placeholder": "Your Message",
 				"rows": "5"
 			}))
+
+
+class LoginForm(forms.Form):
+	username = forms.CharField(
+		widget=forms.TextInput(
+			attrs={
+				"class": "form-control",
+				"id": "username",
+				"placeholder": "Your username"}))
+	password = forms.CharField(
+		widget=forms.PasswordInput(
+			attrs={
+				"class": "form-control",
+				"id": "password",
+				"placeholder": "Your password"}))
