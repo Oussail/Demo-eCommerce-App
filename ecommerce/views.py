@@ -1,7 +1,7 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, get_user_model
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
-from .forms import ContactForm, LoginForm
+from .forms import ContactForm, LoginForm, RegisterForm
 
 
 def index(request):
@@ -29,7 +29,20 @@ def login_auth(request):
 
 
 def register(request):
-	return render(request, "auth/register.html", {})
+	user = get_user_model()
+	form = RegisterForm(request.POST or None)
+	context = {
+		"form": form
+	}
+	if form.is_valid():
+		first_name = form.cleaned_data.get('first_name')
+		last_name = form.cleaned_data.get('last_name')
+		username = form.cleaned_data.get('username')
+		email = form.cleaned_data.get('email')
+		password = form.cleaned_data.get('password')
+		new_user = user.objects.create_user(first_name=first_name, last_name=last_name, username=username, email=email, password=password)
+		new_user.save()
+	return render(request, "auth/register.html", context)
 
 
 def contact(request):
