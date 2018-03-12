@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Register Page
+{% endblock %}
+{% block css %}
+{% endblock %}
+{% block content %}
+
+<div class="container">
+    <h2 style="text-align:center;">Register</h2>
+    <form class="form-signup" method="POST" > {% csrf_token %}
+        {{ form }}
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{% endblock %}
