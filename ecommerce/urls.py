@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from ecommerce import settings
 from .views import index, contact, thanks, login_auth, register
-from products.views import ProductListView, product_list_view, ProductDetailView, product_detail_view
+from products.views import ProductListView, ProductDetailView
 
 urlpatterns = [
 	              path('admin/', admin.site.urls),
@@ -27,8 +27,6 @@ urlpatterns = [
 	              path('thanks/', thanks),
 	              path('login/', login_auth),
 	              path('products/', ProductListView.as_view()),
-	              path('products-fbv/', product_list_view),
 	              path('products/<int:pk>', ProductDetailView.as_view()),
-	              path('products-fbv/<int:pk>', product_detail_view),
 	              path('register/', register),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
